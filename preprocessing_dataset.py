@@ -33,9 +33,9 @@ train_strata = torch.bucketize(torch.tensor([len(doc) for doc in dataset['train'
 val_strata = torch.bucketize(torch.tensor([len(doc) for doc in dataset['validation']['document']]), torch.tensor(bins), right=True)
 test_strata = torch.bucketize(torch.tensor([len(doc) for doc in dataset['test']['document']]), torch.tensor(bins), right=True)
 
-sampled_train_indices = stratified_sample(train_strata, min(300 // len(labels), len(dataset['train'])))
-sampled_val_indices = stratified_sample(val_strata, min(100 // len(labels), len(dataset['validation'])))
-sampled_test_indices = stratified_sample(test_strata, min(100 // len(labels), len(dataset['test'])))
+sampled_train_indices = stratified_sample(train_strata, min(100 // len(labels), len(dataset['train'])))
+sampled_val_indices = stratified_sample(val_strata, min(10 // len(labels), len(dataset['validation'])))
+sampled_test_indices = stratified_sample(test_strata, min(10 // len(labels), len(dataset['test'])))
 
 sampled_train_dataset = dataset['train'].select(sampled_train_indices)
 sampled_val_dataset = dataset['validation'].select(sampled_val_indices)
